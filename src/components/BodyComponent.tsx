@@ -42,11 +42,12 @@ function BodyComponent() {
 
   return (
     <>
-      {articles.map(art => (
-        <Row key={art.id}>
-          <CardComponent article={art} />
-        </Row>
-      ))}
+      <h1 className="text-center text-white my-5">Last Article:</h1>
+      <Row>
+        {articles.map(art => (
+          <CardComponent key={art.id} article={art} />
+        ))}
+      </Row>
     </>
   );
 }

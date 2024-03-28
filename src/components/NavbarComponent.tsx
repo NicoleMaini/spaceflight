@@ -7,8 +7,8 @@ function NavbarComponent() {
   const location = useLocation();
   return (
     <Navbar bg="dark" data-bs-theme="dark">
-      <Container fluid className="px-5">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+      <Container>
+        <Navbar.Brand href="#home">Spaceflight</Navbar.Brand>
         <Nav className="me-auto">
           <Link to="/" className={location.pathname === "/" ? "nav-link active" : "nav-link"}>
             Home
