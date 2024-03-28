@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CardComponent from "./CardComponent";
+import { Row } from "react-bootstrap";
+import { AnArticle } from "../interfaces/ObjArticle"; // ecco importato l'interfaccia necessaria
 
 function BodyComponent() {
   // facciamo la fetch, ma prima settiamo l'interface dell'oggetto per dire a typescript cosa aspettarsi di ritorno
-  interface anArticle {
-    id: number;
-    title: string;
-    image_url: string;
-    summary: string;
-    published_at: string;
-  }
+  // solo che quest'oggetto ci servirà anche nell'altro componente, quindi lo estraiamo, lo mettiamo in un file a parte e lo
+  // lo importiamo in entrambi i componenti
+  // interface anArticle {
+  //   id: number;
+  //   title: string;
+  //   image_url: string;
+  //   summary: string;
+  //   published_at: string;
+  // }
 
   // prima di settare lo stato, qui indichiamo in useState che tipo di obj si dovrrà aspettare con un generics <>
   // dicendogli in sostanza che si dovrà aspettare un array di oggetti anArticle
-  const [articles, setArticles] = useState<anArticle[]>([]);
+  const [articles, setArticles] = useState<AnArticle[]>([]);
 
   // ora fetchamo normalmente le API
   function fetchArticles() {
@@ -38,14 +41,13 @@ function BodyComponent() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Container fluid className="px-0">
-        <Routes>
-          <Route></Route>
-          <Route></Route>
-        </Routes>
-      </Container>
-    </BrowserRouter>
+    <>
+      {articles.map(art => (
+        <Row key={art.id}>
+          <CardComponent article={art} />
+        </Row>
+      ))}
+    </>
   );
 }
 
